@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关于我们 — 上海和珈文化传媒有限公司</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'PingFang SC','Microsoft YaHei','Hiragino Sans GB',sans-serif;
+  background:#fff;color:#1a1a1a;overflow-x:hidden}
+
+:root{
+  --blue:#1E90D4;--blue-dark:#1471b8;--blue-pale:#e8f4ff;
+  --blue-pale2:#f4f9ff;--green:#2ECC8A;--green-pale:#eafaf3;
+  --navy:#0a3264;--muted:#555;--light:#999;--border:#dde8f5;
+}
+
+/* ── NAV ── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);height:62px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 64px;
+  transition:box-shadow 0.3s;
+}
+#nav.scrolled{box-shadow:0 2px 24px rgba(30,144,212,0.10)}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo img{height:42px;width:42px;object-fit:contain}
+.nav-logo-text{font-size:16px;font-weight:700;color:var(--navy);letter-spacing:0.04em}
+.nav-links{display:flex;gap:38px;list-style:none}
+.nav-links a{color:var(--muted);font-size:14px;letter-spacing:0.03em;text-decoration:none;
+  transition:color 0.2s;position:relative;padding-bottom:4px}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;
+  background:var(--blue);transition:width 0.25s;border-radius:1px}
+.nav-links a:hover,.nav-links a.active{color:var(--navy)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-cta{background:var(--blue);color:#fff;padding:9px 26px;border-radius:3px;
+  font-size:13px;font-weight:600;letter-spacing:0.04em;cursor:pointer;border:none;
+  font-family:inherit;transition:background 0.2s,transform 0.15s}
+.nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
+
+/* ── PAGE HERO ── */
+#page-hero{
+  margin-top:62px;
+  background:linear-gradient(135deg,#e4f2fd 0%,#f0f8ff 50%,#e8f5fe 100%);
+  border-bottom:1.5px solid var(--border);
+  padding:60px 64px 52px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+}
+.ph-left .ph-label{
+  color:var(--blue);font-size:12px;letter-spacing:0.18em;font-weight:600;
+  text-transform:uppercase;margin-bottom:12px;
+}
+.ph-left h1{
+  color:var(--navy);font-size:clamp(32px,3.5vw,46px);
+  font-weight:700;letter-spacing:0.05em;margin-bottom:10px;
+}
+.ph-left p{
+  color:var(--muted);font-size:15px;line-height:1.8;max-width:560px;
+}
+.ph-right{
+  display:flex;flex-direction:column;align-items:flex-end;gap:10px;
+  padding-bottom:4px;
+}
+.info-badge{
+  display:flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid var(--border);border-radius:4px;
+  padding:8px 16px;
+}
+.info-badge .ib-label{color:var(--light);font-size:11px;letter-spacing:0.06em}
+.info-badge .ib-val{color:var(--navy);font-size:13px;font-weight:600;margin-left:4px}
+.info-badge .ib-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0}
+
+/* ── SECTION WRAPPER ── */
+.page-body{max-width:1200px;margin:0 auto;padding:0 64px 80px}
+
+/* ── INTRO SECTION ── */
+#intro{padding-top:60px}
+.intro-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:32px;align-items:start}
+.intro-card{
+  background:var(--blue-pale);border:1px solid #c0daf5;border-radius:8px;
+  padding:36px 40px;
+}
+.intro-card .ic-tag{
+  display:inline-block;background:var(--blue);color:#fff;
+  font-size:10px;letter-spacing:0.1em;padding:3px 10px;border-radius:2px;
+  font-weight:600;margin-bottom:14px;
+}
+.intro-card h2{color:var(--navy);font-size:20px;font-weight:600;margin-bottom:16px;letter-spacing:0.04em}
+.intro-card p{color:var(--muted);font-size:14px;line-height:1.95}
+
+.facts-card{
+  background:#fff;border:1px solid var(--border);border-radius:8px;
+  padding:28px 32px;display:flex;flex-direction:column;gap:0;
+}
+.facts-card h3{color:var(--navy);font-size:15px;font-weight:600;
+  margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.fact-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0;border-bottom:1px solid #f0f5fc;
+}
+.fact-row:last-child{border-bottom:none}
+.fact-label{color:var(--light);font-size:12px;letter-spacing:0.06em}
+.fact-val{color:var(--navy);font-size:14px;font-weight:600}
+
+/* 分割线 */
+.sec-divider{height:1px;background:var(--border);margin:52px 0}
+
+/* ── WHY US ── */
+#why-us .sec-hdr{margin-bottom:32px}
+.sec-hdr h2{color:var(--navy);font-size:24px;font-weight:600;letter-spacing:0.06em}
+.sec-hdr p{color:var(--light);font-size:13px;margin-top:6px}
+.sec-hdr .ln{width:36px;height:2.5px;background:var(--blue);margin-top:12px;border-radius:2px}
+
+.why-grid{}
+.why-card{
+  background:#fff;border:1px solid var(--border);border-radius:8px;
+  padding:28px 32px;transition:box-shadow 0.25s,transform 0.25s,border-color 0.25s;
+  display:flex;flex-direction:column;gap:12px;
+}
+.why-card:hover{
+  box-shadow:0 6px 24px rgba(30,144,212,0.10);
+  transform:translateY(-3px);border-color:#a8d4f5;
+}
+.wc-num{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--blue-pale);border:1.5px solid #a8d4f5;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--blue);font-size:13px;font-weight:700;flex-shrink:0;
+}
+.wc-title{color:var(--navy);font-size:16px;font-weight:600;line-height:1.3}
+.wc-desc{color:var(--muted);font-size:13px;line-height:1.85}
+
+/* ── GREEN PROMISE ── */
+#green-promise{
+  background:linear-gradient(135deg,#edfaf4 0%,#f4fbf7 60%,#eaf8f0 100%);
+  border:1px solid #b8e8d2;border-radius:12px;padding:44px 48px;
+}
+#green-promise .sec-hdr{margin-bottom:32px}
+#green-promise .sec-hdr h2{color:#0a4a28}
+#green-promise .sec-hdr .ln{background:var(--green)}
+
+.green-grid{}
+.green-item{
+  background:#fff;border:1px solid #b8e8d2;border-radius:8px;
+  padding:22px 24px;display:flex;flex-direction:column;gap:10px;
+  transition:box-shadow 0.2s,transform 0.2s;
+}
+.green-item:hover{box-shadow:0 4px 18px rgba(46,204,138,0.12);transform:translateY(-2px)}
+.gi-icon{font-size:26px;line-height:1}
+.gi-title{color:#0a4a28;font-size:15px;font-weight:600}
+.gi-desc{color:#3a6a50;font-size:12px;line-height:1.75}
+
+/* ── FOOTER CTA ── */
+#cta-bar{
+  background:linear-gradient(135deg,#1471b8 0%,#1E90D4 60%,#3aa8e8 100%);
+  padding:40px 64px;display:flex;justify-content:space-between;align-items:center;
+}
+.cta-left h3{color:#fff;font-size:22px;font-weight:500;margin-bottom:6px}
+.cta-left p{color:rgba(255,255,255,0.7);font-size:13px}
+.cta-right{display:flex;gap:20px;align-items:center}
+.cta-phone{color:#fff;font-size:20px;font-weight:600;letter-spacing:0.08em}
+.cta-email{color:rgba(255,255,255,0.65);font-size:12px;margin-top:3px;text-align:right}
+.btn-white{background:#fff;color:var(--blue);padding:11px 28px;border-radius:3px;
+  font-size:14px;font-weight:700;cursor:pointer;border:none;font-family:inherit;
+  transition:all 0.2s;letter-spacing:0.04em}
+.btn-white:hover{background:var(--blue-pale);transform:translateY(-2px)}
+
+footer{background:#0a2a5e;padding:18px 64px;display:flex;justify-content:space-between;align-items:center}
+footer p{color:rgba(255,255,255,0.38);font-size:11px}
+
+/* ── Scroll reveal ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.vis{opacity:1;transform:none}
+
+@media(max-width:900px){
+  #nav{padding:0 20px}
+  .nav-links{display:none}
+  #page-hero{flex-direction:column;gap:28px;padding:40px 24px 36px}
+  .ph-right{align-items:flex-start}
+  .page-body{padding:0 24px 60px}
+  .intro-grid{grid-template-columns:1fr}
+  #cta-bar{flex-direction:column;gap:20px;text-align:center;padding:32px 24px}
+  .cta-email{text-align:center}
+  footer{flex-direction:column;gap:6px;text-align:center;padding:16px 24px}
+}
+/* ── Bootstrap 5 + 移动端响应式补丁 ── */
+#nav{padding:0!important;height:auto!important;min-height:62px;flex-wrap:wrap;align-items:stretch!important}
+.hj-nav-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;width:100%;padding:0 64px;min-height:62px}
+a.navbar-brand.nav-logo{padding:0;margin:0}
+.navbar-toggler{border:1.5px solid var(--blue)!important;padding:5px 10px;border-radius:4px;box-shadow:none!important}
+.navbar-toggler-icon{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%231E90D4' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")!important}
+.navbar-collapse{flex-basis:100%}
+.navbar-collapse.show .nav-links,.navbar-collapse.collapsing .nav-links{display:flex!important;flex-direction:column!important;gap:0;padding:8px 0 14px;border-top:1px solid var(--border);width:100%}
+.navbar-collapse.show .nav-links a,.navbar-collapse.collapsing .nav-links a{display:block;padding:9px 4px;font-size:15px;border-bottom:1px solid #eef3fa;width:auto}
+.navbar-collapse.show .nav-links a:last-child{border-bottom:none}
+.navbar-collapse.show .nav-cta,.navbar-collapse.collapsing .nav-cta{display:block!important;width:100%;margin:10px 0 6px;text-align:center}
+@media(max-width:991.98px){.hj-nav-inner{padding:10px 20px;min-height:0}}
+@media(max-width:767.98px){
+  #page-hero{padding:30px 20px 26px!important;flex-direction:column!important;gap:20px}
+  .ph-right{align-items:flex-start}
+  .page-body{padding:0 20px 50px!important}
+  .intro-grid{grid-template-columns:1fr!important}
+  #cta-bar{padding:30px 20px!important}
+  footer{padding:14px 20px!important}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar navbar-expand-lg fixed-top hj-navbar" id="nav">
+  <div class="hj-nav-inner">
+  <a class="navbar-brand nav-logo" href="hejia_home_v3_final.html">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCADIAMgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7LooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoooyKACimedDv2eam/+7uGfyp2RQK4tFFFAwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApGIAyaU15F8Xde1XxD4jg+GfhaXy7i5UNqlyM4giIyVJHTjk+uVX+KujC4aWIqcqdlu32XVnNi8VHDU+dq72S7t7In8WfFS5utYbw18PdL/ALd1QErJcAZt4exOcgNg9yQvua848U3Mya1NpvxI+Imrx3iBWlsdMtmMUe5QwG75VPBHRT9a998C+EtI8H6LHpmlQgcAzTMP3kz/AN5j/IdB0Fa9zY2c7mSa1t5Hxjc8SsfzIr0aWYYfDS5aUNO+nM/O7TS9EvmeZVy7EYmHNWqe9215V5WTTfq38j5d8j4Kgbzrni3zP+enlrn/ANBrf8D6dquoi7n+F3xB1OZrHaZLLVISqMGztwTuQ5wR90V0vw9tLWT4+eN4XtoGjSJNqGMFV5ToMcV3/j/Vf+EP8EaprmnWNq01sissZXajMWCjdtwTjNehi8dJTjRheTko25mmves7WcfO26PNwmAi4SrztGMXK/Kmn7t1e/N5dmcj4T+Kdza6ynhr4haX/YWqEhY7jGLebsDnJC5PcEr7ivVVIIyK4y90XS/iX8PdPk1mzSJr20S4jdOXtpGUHKE/y6EcGuW+EWvar4e8Rz/DPxTL5lxaru0u5OcTxAZCgnrxyPTDL2ryq1CnXjKdJcso/FHpbuv1XT0PXoYiph5xhWfNCXwy6+Sl+j6nrtFFFeWeuFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABQSB1oPArxb4zeMLjVvEEfw80PVLbThJxql/NOI0iXGTHuJHbkgcnIXua6cJhZYmpyR06t9l1Zy4zFwwtPnlq9ku77F7x98Z9P0y+bR/C8EOr6hv8ALaZ5AltG3puyN2O+CB71B8HBo+gnVde8TeKPD769q85kmKahE/lpnO3IOMliSQMjhR2pll4B+C8NlFDPqum3UqIA8r6yFLnucK4A+gFcf8HfDPw31bw/ez+K57GO7S/kjiE2o+QfKCrtwu4ZGSea99U8H9VnGmppacz5dX267abHzrqYz63CVVwb15VzaR79N9dz6N06+stRtVurC7t7uBshZYJA6nHXkcVYPQ1x3hS7+HnhfShpmia5olra72kK/wBooxLHqSSxJPA/KtY+LvCmD/xU2i/+B8X/AMVXz06MuZ8idul0fSU68eVc8lfrZnnPw5/5OC8c/wDXJP5pXT/Hv/kkmvf9c4//AEalcR4B1zRbf45+M7+fV9PitJ4kEM73KLHJyn3WJwfwro/jb4j8PX3wu1q1std0u5uJI4wkUN2ju371TwAcnivZq05/X6Ls/wDl3+SPEpVYf2fXV1/y8/NnVfC3/knHhz/sGwf+gCue+Mng3VddOla94Z8lNe0mcSQl22eYmc7c9MhgDg4GCw71a+G3ijw1beANAt7jxDpMM0enwq8cl5GrKwQZBBOQa63TdY0rU939m6nZXuz732edZNv12k4rzpTq4bEyqxWze60/pnoxhRxWFjSk90tnr/SPO/CXxYU6uvh7xxpb+HdXyFVpMiCQnpyfu57HJU+tepAg9K5T4l6D4X8QaC1r4mmtbVOfIupZFjeF8dVZv1HQ964f4R+JtR8P+IT8O/Et2l2Nu/R79X3JcR84UN3GAcehBXsK0nQpYmk6tCPK1vHpbvH06roZ08RVwtVUa8uZPaXW/aS8+j6nsdFA6UV5h6wUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBk+MNYj0DwxqWsyAEWds8oU/xMB8o/E4FeQfCr4X6H4n8JJ4k8Ww3F3qGpzSXO4XDphC3BIB5JILfiK679pCd4PhNqewkeZJCjfTzFP9K3bOU6L8KIp7MBWstEEkXHdYMj9RXrYepUoYRSpO0pytdaaJL9WeNiadOvjHGsrxhG9n3b3+5HjPjbRfhppOvHw54d8Jaj4i1pciSG3vpdkR9CRkkjuB07kVxfg6Pw9b2D3virwbqV/pv2oxNqNtcyIIDgfuyo+UkZzyQTnvXuX7N+jW1r4ATXGAk1DVZZJbiduXYByoXPpwT9WNUv2brW3vfAGtWl3Ck1vNqs6SRuMq6lEyCK9p5i6FOrBuUuRpN8zu9727bafieGsu9vUpTSjHnTaXKrJaWv331/Aoa/8NvhvJ8OdR8TaBbSTKuny3FrMLuRhlVJGQT2I5B9CDTPhV8K/BfiD4faVrOp6dNLeXMbtIy3ToCQ7DoDgcAVneEFk0rwp8VfCiSNJZaYsxt9xztDLICPyRfxzXpPwH/5JHoP/XGT/wBGPXLi8RiaGHmlVk/eVnd3s43R14PD4bEYmDdKK9x3Vla6lZnlng74e+FtT+Lninw5d2Uz6dp0atbRi4cFSSucsDk9T1rb+K3wr8GeHvh/qus6Xp88V5bIhidrqRgCZFU8E4PBNaHw5/5OC8c/9ck/mldP8e/+SSa9/wBc4/8A0alFXG4lY6jBVHZ8ml31Sv8AeOngcM8BWm6auuezsujdvuOY8DfCLwNq3g3R9TvdNuHubqyimlYXcgBZlBJwDgc1gfFjwbpXw1g0jxb4Qa6sLuG+WJ0MzOsilWbnPOPlwR0INeufC3/knHh3/sGwf+gCuH/ap/5J/Y/9hOP/ANFyVlhcZiKmPVKc24uTTTd1b0NcXgcPTy91YQSkopppWd9OphaJoNp8T/ij4on8TyXE1npDrb2lokpVVBLDqOn3SeOpPPSuD8deGpvDHjfVtM0G5nMWiwpqlpvbLQrmMsAfYsD77eea9S+A/wDyP3j/AP6/U/8AQ5KzfEsKXPx08V28oyknheVW+hiSu6jip0sTOnf3Iwi7dNo/nd/eefXwkK2EhUa9+U2r9d5f5I9f8H6xHr/hjTdZjAAvLZJSo/hYj5h+ByPwrWrzj9m+d5vhNpm8k+XJOi/TzGP9a9Hr5jF0lRxE6a2Ta/E+rwVZ1sPCo92k/wAAooornOkKKKKACiiigAooooAKKKKACiiigDhvjvpz6n8LNbhjUs8US3AA9I2DH9Aaq6Pqqaz8AnvkYMx0GWKTn+NImRv1Wu/uYYri3kgmQSRyIUdT0ZSMEflXz/pF5J4BPi/4c6vIUs7qzubjSJnOFcNG2Fz6sB/30pHcV6+CXt6Hsl8UZKS9Nn92jPEx7+r1/av4ZxcX5Pdffqj0b9n7/kkWh/7sv/o16xP2Yf8AkS9V/wCwxN/6Albf7P3/ACSLQ/8Adm/9GvWJ+zD/AMiXqv8A2GJv/QErTEbYr/GvzkZ4X4sJ/gf5RMnwXpr6z4p+LmkxOEkvJGhRj0DN5oGfxpnwq+JWh+E/DEfhPxd9p0jUdLd4irwMwcFiw+6CQeSPQ8EHmtj4Of8AJU/iP/1/p/6FJXpeo6NpGoOJb/SrG7kUYVp7dJCB6ZINXi8TTjOVGtFuLUHo7NNRXkycHhak4RrUZJSTmtVdNOT9DyH4O6pY618a/GGq6bN51nc26PFJtK7huUdDyOQa7P49/wDJJNe/65x/+jUrlPhfbwWvx68bW9rBHBDHCgSONAqqMpwAOBXV/Hv/AJJJr3/XOP8A9GpRiOX+0aPLt+7/ACQYfm/s2tzb/vPzZrfC3/knHhz/ALBsH/oArh/2qf8Akn9j/wBhOP8A9FyV3Hwt/wCSceHf+wbB/wCgCuH/AGqf+Sf2P/YTj/8ARclY4L/kZx/xfqdGO/5Fcv8ACvyRB8B/+R+8f/8AX6n/AKHJXPfEPU49I+L/AIvvnbaR4ZaOPnq7rGi/q1dD8B/+R98f/wDX4n/oclcj8QdA/wCE2+P82kafcCaAxwi/kiyRAiAeYCemeg+rAdQa9OiofXqntHaPIr/dE8is5rL6apq8ud2++R6x8CNOfTPhZokMqlXlia4IPpIxYfoRXc1HbQxW9vHBCgjjjQIijooAwB+VSV8zXqutVlUfVt/efVYeiqNKNNdEl9wUUUVkbBRRRQAUUUUAFFFFABRRRQAUUUUAFcd8U/Amn+N9EFtKy29/BlrS5252Meqt6oeMj6EciuxorSjWnRmqlN2aMq1GFeDp1FdM8N+HvjWX4dRQ+B/HWmyaakDP9kv0BeKRWYtkkdRkn5h+IFbH7L5DeCtUZTkHV5SD6jYlel65o+l63YPY6tYW97bt1jmQMM+o9D7jmvIvh1cf8K7+Jmp+Bb9jHpeqSC50mVz8u48Bc+pA2/7yD1r2fbU8XQq8kbVHaTXR23a69btfceH7GpgsRR55Xpq8U+qutE+nSyZpfBz/AJKn8R/+v9P/AEKSvWj0NeS/Bz/kqfxH/wCv9P8A0KSvWWIwea4s0/3j5R/9JR35T/u//b0v/SmeP/Dn/k4Lxz/1yT+aV0/x7/5JJr3/AFzj/wDRqVzHw5/5OB8c/wDXJP5pXT/Hoj/hUmvf9c4//RqV21f+RhR9Kf5I4qX/ACLq/rU/Nl74d31nY/DTw297d29sjadAFaaUICdg4Ga88/aa1/Rr7wtp2k2eqWdxdtfpL5cUyvtQI4LMR0GWHWup0Twb4f8AGPww8Jwa/aNcJbWELw7ZWQqTGAfunntXmOo+CPC2q/Faz8H+FLB0s7E+brFz57ycAjMYJPGOF4/iY/3a0wEMOsXKrOTvBtvRW087/puYZjPEvCRowirTUUtXfW3S367FHwprXiefxZ4r07wFALmfWLzP29c7beIM/wA+SMLndwTyOwJr3L4XeBrLwXozQrJ9q1G5Ie9u2HMj+gzyFHOPXJJ5NdDoej6XolgljpNhb2VuvSOFAoz6n1Pueav1xY7MvrC5KceWOl+7srK/+Wx35flf1e06suaWtuyu7u3+e4UUUV5Z64UUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUABrj/il4HsvG2hC1kk+zX9uTJZ3QHMT+h77TgZ+gI5FdhRWlKrOjNVIOzRlWowrQdOorpnz18LNdk8A+OdcsfiA09le6oY2F3Ku6KRlLZYuOoO4fN065xXe+KfDHjDxDrMmreHPiM9hpk6J5MEEe9FwMEhlODk5Ofeuz8R+HtH8RaebHWtPgvYOoEg5U+qsOVPuDXm0/wZudKne48F+M9V0Tcc+SzF0/MEfqDXsfXKOIqe2b5J2s7xUo6aaaNrbszxHga+Hp+xS54XurS5ZL11Sf3oo2fwj8aWerXWrWvxFaG/uwBcXCWrB5QMYyd3sKk8ceH/ABNoPwk8U/8ACReLZdeE8cHkiSLb5WJVzgkknORx7Va/4Q74yeX5H/CxrTy8/f8AJ+fGfXZn9aIPg1c6pcJceNPGera3tOfJViifmSf0Aro+tLnjOtWi0mn7sddOl+VW+85/qj5JQoUJJtNe9LTVau3M779jn9N+IGr6n4T0XwR8P7Oa41ddPihu70rtS1wgDYJ6Ef3zwO2TXp/wt8D2fgnQjao4uL+4IkvLojmV/Qd9oycfUk8mtrw34e0fw5p4sdF0+CygHJEY5c+rMeWPuTWrXmYvGxqJ06MeWLd33b8/0Wx6mDwEqbVSvLmklZdkvL9WAooorzj1AooooAKKKKACiiigAooooAKKKKACoru5trSBp7q4igiX7zyuFUfUnipaxPGYmfRXji8NxeIt8ihrKWSNFYZzuPmfKcEDiqhHmkkyKkuSLl/X4alG5+IXg6G+isk1+1urmVxGsdpm4OScc+WDgepPSt5tT05HKNf2qspwQZlBB/OvGPh/4h1SP4geLV0XwVG0rPbRzWUGoQRfZfLUocdAwJ67eh4NangnwV4U1vStf1PVtAsbu8GsagPNlTLYWVsDOe1epWwNKj8baSt2e6vtdW/U8nD5hVrfCk2790tHbezvf8Op6hfavpVjZJe3up2VtauwVZpZ1VGJzgBicE8H8qoXfi7w7Bo11q8erWt3aWjIs72kgm2FmCqCFz1JFcD4PutEsv2e9Gm163jmtvszKivamcCQtIFIUKcfXHFcw7QX3wKsl8P3dvZeUlnbarF/ZuGup2eIKfMOM4JzuG4HpmlTy+Lk1K9lLlv03+f9MKuZTUU4pXcOa3X9NP8AI+gGdFxvdVz6nFKrqwyrAj1Brw/yLjxV8QdO8PeMpbfWYrDUb+3DJB5CyBbaFwSqt1Bb1rpPhvo0114Bu9L0nVbrRRBrd6sctqFZlRZ3AT5wRjGPfisamCjTgm566dNLO/Xfp2N6OPlVm4xhpr11urfLr3O/13U7fR9HutUuhK0FrEZZBFGXbaOThRyak0q/tNT0221GymWa2uYllicdGVhkGvKdH0zxNfeKtb8Lat4/1uGe2CzWwEMG26tXGN/KdQ2VbHHSq17oGu+Htd8O+CvDnjfVwbje8kQhgCWlqn3nACdSxwM9TmtPqNP4faLm362ta/Yz/tCr8fs3y7bq9727ntOR61ljXdOPiY+HVmZtQW1+1MgQkLHu2glugJPQHrWJqGof8IF4PuL7XNX1DW3WX900sa+bK7YCQqEUDk9Djuaw/gUbvULfxFr+tQ7NbutXeC6zz5axKoWIegXJFYRwv7qdVu6Wi838+i/yOiWLftYUUrSer8l8ur/zO70DWdO12xa90y48+BZpIS2wr86MVYYIHQg1oZHrXiXgnxbJpPgs6HoUI1DxNfapfCztF5EY89syyn+FF689a7LUtVvPAPw+tU1K9udf1uT9xb5GXurlskKMD7o5687Vq6+BlCpyR6uyXV+fp5/5MzoZhGdPnl0V2+ifb18v8zp7DXtMvtV1HTba433GmuiXI2kKjMu4DceCcdQOnejSNf0zVbnULezuN76fcfZrglSqiQAEgE/ewCOleLaQmnz/AA30+/1zwNqXiSO4WfWL2+juFjQTMzhy3zqeFQeoAxiqPgnwzpp8M2k+o/CXWdVuJw0/2mO6VEZHYsgUGQEAKVHIzXU8tpKMm5PR2+zv13ku3lutzlWZ1XKKUVqr/a26bRffz2ex9EtIgjMm4FQM5HNZOmeItP1HwsniS2MxsHt2uFLRkOUXOTt/A1xuo3l/pXwhv5dI0d/CqabFIEtb9RMTEFJIUq/BYtgEng9q5rTdO1F9Du/BPiN7G7sNJ8Nx38C20UkLwy4dUDsH+YgKxPY56VzU8FGUXJy2dvl18uq6nRVx8ozUVHdX8r9PPo+h6tN4k06LwcfFTef/AGeLIXpIj+fyym77vrjtWpZzpdWsVzHnZKiuuRg4IyK+Ybm20kfDU3AsfDAuP7LDeaviiVrjf5ec+R93f/sdM8V9C+A9IsNH8L2Vvp0LRRSRLMymRny7KCTliT+HSqxuChh4XTd7tdNl6NiwGOqYmdmlayfXd+qRvUUUV5p6oUUUUAFFFFABXN/ELWNR0jQD/Y9lLeapeSraWSqmVSV84dz2VcEkn0x3rpKhnuIYZYYpJFV52KRqerEKWIH4An8KqnJRkm1e3QzqxcoNJ2v1PFPBfgZrbxxr1tpepNbaro0mnvHfMpbzt8ZNwHXPzLJljjsdp7VqeCvGfhXRNL8QaZquu2VndnWdQYQyvhsNK23t3rrrH+wdG1DVvGP9qO8OtvAp+QsoaNSgCBRuOcHP0q5pWm+HdLiW0t0Qf2rPNcosuWaR3zI+MjI4ycdq9SrjFVT9qm/h8tUtdbPqeRRwTpWdJpfF56N6aX7WOR+H2r6ZovwC0m51W+hs4nspIkaVsbnJkwo9SfQViaTqX9r/AA98D+F1stQt5nvrGGQXNuYxKkC+dKyZ+8g2AZ9TXpvhmz8O22kLo+kwxm00iYwiORWbyZB8x5fnI3dffrWbqmlaBrl3beJW1q9T7XaCxsJ7a4KCPzHzviIGVdsBc+gxUxxVP2kpOL1k2n99tPn3Klhans4RUlpFRa+6+vytsef6VqOn6Z8R7fVNRvbeztD4h1oGeeQInEUKDJPuCK7n4LzQz+Fr2eCVJYpdZv3jdDlWU3DEEHuCKboHhfwWf7GSxmN99iN5LB5snm+ezuEneTI+Yh8DPGDUdlp3hq88G6hY6Fr+padp6XMl5PdWjtEyBmMjhWKj5CM/dzgU8RWp1Y8qutle3S8v8xYahVoz53Z7u1+rUf8AIzfjNfWFvf6VcaPeE+M7Wb/iXW1snmyTI2A8cijpGR1JxjqKj+Dt/ZXOt6vda/dmPxrdSlLy0uE8toIlPyRwg/ejA5yCcnr611XgrQPCPh+CR9BhhMkkCXE12zmWaaN8lXaQ8kHaT6cdKPEOgeEfGkVut/bw3UpgW5triIlJkjb7ro4wQD/kVP1ikqfsLO383Xva3bra++t+hf1aq6vt7q/8utu179+l7baW6nUOkcoAdFcBgwDDOCDkH868m8HweKbqw8R2vhm8sLEy+Kb5bm6uEZ3hTK/NGnRm/wB7gV3PgqGw03SrewtddvtWWZGuYJbycyyNFkAYOB8oyB+NN8Fabpulf23Dp2oG8abVprm5BxmGaQKxj49AVP41hTqKjGaWu1rr9Doq03XlCT03vZ66rv8A5HK/s9aRZWfhW6v1hR7+fULmK4umX95MElZRk/hnA4zXVaPrdr4istXeO1Kf2Ze3FnufDbnjGC6+nDY9etcpZ+EPDsp1K50Lxv4l0+yjlkuJ4bG+KwRliWZlypyM5PBPSur8KaVoehaC+jaZdSyRiM3U0s0heR/NLEys2OScN+VbYydOpOdW7cm+239aIxwUKlOEKVkopd07/wBbnK/DfR7XXvgDpmk3stzHbXNiyStbf6zb5jEgcHrjGMd65cn+13sdE8BeM/F9xfy8Tm4utkemQocMZk2AhuypwSfavU/ANlpei+GNN0HTdQa8hgtFlhkcDdJE7Eq/AAwc1Vl0Pw9qXiRPFVjdvbX2nyvBeS2km0ThBhophj5gDg+vHWrhjIxq1G72bbWml33X9fMzngnKlTStdJJ662W9ncXxl4audW+H8vh+PV2EwijzdXg3+aY2DfvcY4Yr8xHYmvP/AABrN54quPFWrRappej6vcGDes9ubiAWUSFS67iu6NmLndnA716JrtvovjTSItJXV5/s11FHdkWc2w3FuTjBOPuN0OMGqGqaT4E1/SNHt5WtzYyyrbWaW8hjW4Ee4+QdvLINrHaeMrUUK8YUnCad2+22zenW9tulvUvEUJTqqcGrJd990vS19+tzxBb7UD4zGomLRBpRtNn9o/2AnkfZfO2fafI3Z2+Zxvznbz0r6P8ACcWpQ6PGup6nZ6lITujntLfyYzGQNoChmHTvnmsaOy8Ov8QHZLndeR6UNOfTxB+5WLPmcnbtHBA25xjtV/wLp+gaXplxYeHWlFnDdyK0bO7CGTPzIu/oo9BxV4/FxxEIpRtZLp+v+Wj7IjLsJPDzk3K92+v6f56rzudDRRRXlHshRRRQAUUUUAFZWvaU2p3GmsZHjjtrhpZDHM0bkGN1GCuD1Yd+latFNNp3RMoqSszjR4b1S28HaVpcJhmurGcSMPtkkAcZfgSqCwOGHOOeau6jb3cviTw6RbSkWomkuJASyJmEoBvPU7j9Tya6WggVo60m7vz/ABMlh4pWXl+By50XVn0vxDaJJbwSaldu0MiyFikTqiFvu8MAGIHIzjmoW8MajD4U1LRrS9jaQTmfTJpAB5bblkXcFUAASA/dHQiuuooVaSB4eD37W+85bwj4Yl0PVLuYyxvamGOK0RSd0fGZc/7z/NUXh3QdWtPBl3od2sCTG1aCKQXskysShXdhlHljp8q5FddRQ60nv5fgEcNCKSXS/wCJzOheHbrS59ViWWA2U8EcdlGM5hA8wsh/2Qzkr6A47Ck8I+G5tEe1Z52k8vS4LWTdO8n7xCcld3ReeAMfSunoodaTvfqEcPTjay22OV8K6FqumzW4vHs2isLE2duYnYtMC6tvbIGzhQMDd1PPSm+GPDN/pcty1zfi4F/bZu+gK3BZiSmFGVxIwy3Pyr+HWUUOtJ38wWHgreRzmnaZq48Jz6JeJYo8dmbS3lhkYrIPLKhmUqNnbgFu/NLofh19Oa5Vp5HjnsILcl53lYMgkDEb84HzjA+vFdFRS9rKzXcfsIXTfQ5fwzo+sacgNyLEva6bFY2ojkYiXy84dyVG3Py/KM455NR+G/DF/o9tfWxvxdR3lqu9nwCtxtYOw2qPlOV5OTxzmusoputJ38xLDwVvL9TkvCvhe80bXmujPA1l9gSGOJc5jl37pMcfcJ+YehZuMYrO0bwVqVleadJJc2rQWU0c8aKWyrsCJyOO5CEfV676iq+sTu33J+qU7JdjnLDStStvGOo35SNrK8KMri8kBQrEiYMO3YTlfvZzirfhiwvLCO/F4sQM9/NcR+XIW+R2yM5Awfb9a2KKzlUclZ+X4GkaUYu68/xCiiioNQooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//2Q==" alt="和珈Logo">
+    <span class="nav-logo-text">和珈文化传媒</span>
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="展开菜单">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarMain">
+    <ul class="navbar-nav ms-auto nav-links">
+      <li><a href="hejia_home_v3_final.html">首页</a></li>
+      <li><a href="hejia_about.html" class="active">关于我们</a></li>
+      <li><a href="hejia_services.html">服务内容</a></li>
+      <li><a href="hejia_cases.html">客户案例</a></li>
+      <li><a href="hejia_contact.html">联系我们</a></li>
+    </ul>
+    <button class="nav-cta ms-3" onclick="document.getElementById('cta-bar').scrollIntoView({behavior:'smooth'})">获取方案</button>
+  </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div id="page-hero">
+  <div class="ph-left">
+    <div class="ph-label">About Us</div>
+    <h1>关于我们</h1>
+    <p>上海和珈文化传媒有限公司是一家专注于绿色低碳会展执行的整体服务商，长期深耕高校、科研机构及国际组织场景，具备从前期策划、绿色采购、现场执行到数字化归档的全流程独立交付能力。</p>
+  </div>
+  <div class="ph-right">
+    <div class="info-badge">
+      <div class="ib-dot"></div>
+      <span class="ib-label">成立时间</span>
+      <span class="ib-val">2023年</span>
+    </div>
+    <div class="info-badge">
+      <div class="ib-dot"></div>
+      <span class="ib-label">注册地</span>
+      <span class="ib-val">上海</span>
+    </div>
+    <div class="info-badge">
+      <div class="ib-dot"></div>
+      <span class="ib-label">服务定位</span>
+      <span class="ib-val">绿色会展整体解决方案</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- 公司简介 + 基本信息 -->
+  <section id="intro">
+    <div class="intro-grid reveal">
+      <!-- 简介卡片 -->
+      <div class="intro-card">
+        <span class="ic-tag">COMPANY PROFILE</span>
+        <h2>我们是谁</h2>
+        <p>上海和珈文化传媒有限公司是一家专注于绿色低碳会展执行的整体服务商，长期深耕高校、科研机构及国际组织场景，具备从前期策划、绿色采购、现场执行到数字化归档的全流程独立交付能力。</p>
+        <br>
+        <p>我们的客户涵盖国际组织、顶尖高校及跨国企业。2026年4月，我们受托承接联合国开发计划署（UNDP）绿色数字创新合作项目下的"上海气候周——世界地球日"会场服务，这是我们在绿色会展领域的代表性实践。迄今累计执行各类会议、论坛及展览活动逾十余场，执行质量获客户持续认可并转介绍合作。</p>
+      </div>
+      <!-- 基本信息卡片 -->
+      <div class="facts-card">
+        <h3>公司基本信息</h3>
+        <div class="fact-row">
+          <span class="fact-label">公司全称</span>
+          <span class="fact-val">上海和珈文化传媒有限公司</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">成立时间</span>
+          <span class="fact-val">2023年</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">注册地</span>
+          <span class="fact-val">上海</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">服务定位</span>
+          <span class="fact-val">绿色会展整体解决方案</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">累计执行</span>
+          <span class="fact-val">逾10余场活动</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">单场规模</span>
+          <span class="fact-val">最大近200人</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">联系电话</span>
+          <span class="fact-val" style="color:var(--blue)">135 8872 5432</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sec-divider"></div>
+
+  <!-- 为什么选择我们 -->
+  <section id="why-us" class="reveal">
+    <div class="sec-hdr">
+      <h2>为什么选择我们</h2>
+      <p>四项核心优势，让每一场活动都值得信赖</p>
+      <div class="ln"></div>
+    </div>
+    <div class="why-grid row g-3">
+      <div class="col-12 col-md-6">
+      <div class="why-card h-100">
+        <div class="wc-num">01</div>
+        <div class="wc-title">服务过国际组织与顶尖机构<br>深度理解高标准需求</div>
+        <div class="wc-desc">从联合国开发计划署到上海交通大学，我们熟悉国际组织及高校、国企的采购规范与流程要求，沟通成本低，执行落地快。</div>
+      </div>
+      </div>
+      <div class="col-12 col-md-6">
+      <div class="why-card h-100">
+        <div class="wc-num">02</div>
+        <div class="wc-title">全流程一体化<br>降低协调负担</div>
+        <div class="wc-desc">策划、采购、设计、搭建、摄影、线上直播、同传翻译，全部由我们独立交付，客户无需对接多家供应商。</div>
+      </div>
+      </div>
+      <div class="col-12 col-md-6">
+      <div class="why-card h-100">
+        <div class="wc-num">03</div>
+        <div class="wc-title">绿色执行有实际案例<br>不只是口号</div>
+        <div class="wc-desc">我们承接的UNDP气候周项目本身以气候与可持续发展为主题，绿色会展理念贯穿执行全程，是真实落地的实践，而非概念包装。</div>
+      </div>
+      </div>
+      <div class="col-12 col-md-6">
+      <div class="why-card h-100">
+        <div class="wc-num">04</div>
+        <div class="wc-title">配合ESG汇报<br>提供数据支持</div>
+        <div class="wc-desc">针对有ESG披露要求的企业及国企客户，提供活动碳排放估算、绿色采购记录等配套材料，支持客户内部合规汇报。</div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sec-divider"></div>
+
+  <!-- 绿色承诺 -->
+  <section id="green-promise" class="reveal">
+    <div class="sec-hdr">
+      <h2>我们的绿色承诺</h2>
+      <p>每个项目中落地执行的低碳措施，不是愿景，是行动</p>
+      <div class="ln"></div>
+    </div>
+    <div class="green-grid row g-3">
+      <div class="col-6 col-md-4">
+      <div class="green-item h-100">
+        <div class="gi-icon">📄</div>
+        <div class="gi-title">无纸化优先</div>
+        <div class="gi-desc">签到、议程、资料数字化呈现，减少现场印刷；所有文件优先以电子形式分发与存档。</div>
+      </div>
+      </div>
+      <div class="col-6 col-md-4">
+      <div class="green-item h-100">
+        <div class="gi-icon">♻️</div>
+        <div class="gi-title">可复用物料</div>
+        <div class="gi-desc">展架、背景板等主体结构可拆卸，跨项目复用；物料余料统一回收处理，不随意废弃。</div>
+      </div>
+      </div>
+      <div class="col-6 col-md-4">
+      <div class="green-item h-100">
+        <div class="gi-icon">🌱</div>
+        <div class="gi-title">绿色采购</div>
+        <div class="gi-desc">每个项目提供环保物料替代建议清单；优先筛选具有环保资质的供应商合作。</div>
+      </div>
+      </div>
+      <div class="col-6 col-md-4">
+      <div class="green-item h-100">
+        <div class="gi-icon">💾</div>
+        <div class="gi-title">数字归档</div>
+        <div class="gi-desc">摄影摄像成果100%数字化交付，支持云端存储与分发，替代传统冲印归档方式。</div>
+      </div>
+      </div>
+      <div class="col-6 col-md-4">
+      <div class="green-item h-100">
+        <div class="gi-icon">🌐</div>
+        <div class="gi-title">线上延伸</div>
+        <div class="gi-desc">支持混合会议模式，线上线下同步举办，减少参会者长途出行碳排放，扩大活动覆盖范围。</div>
+      </div>
+      </div>
+      <div class="col-6 col-md-4">
+      <div class="green-item h-100">
+        <div class="gi-icon">📊</div>
+        <div class="gi-title">碳排放记录</div>
+        <div class="gi-desc">为有需要的客户提供活动主要环节碳排放估算，支持ESG报告填写与内部合规汇报。</div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-body -->
+
+<!-- CTA -->
+<div id="cta-bar">
+  <div class="cta-left">
+    <h3>有活动需求？欢迎联系洽谈</h3>
+    <p>上海和珈文化传媒有限公司 · 专注绿色会展整体执行服务<br>提交需求后48小时内回复，提供初步方案建议</p>
+  </div>
+  <div class="cta-right">
+    <div>
+      <div class="cta-phone">135 8872 5432</div>
+      <div class="cta-email">z62576258@163.com</div>
+    </div>
+    <button class="btn-white" onclick="window.location.href='mailto:z62576258@163.com'">立即咨询</button>
+  </div>
+</div>
+
+<footer>
+  <p>© 2023 上海和珈文化传媒有限公司 &nbsp;·&nbsp; 上海 &nbsp;·&nbsp; 沪ICP备XXXXXXXX号</p>
+  <p>公众号：上海和珈文化传媒有限公司 &nbsp;·&nbsp; z62576258@163.com</p>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

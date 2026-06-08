@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联系我们 — 上海和珈文化传媒有限公司</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'PingFang SC','Microsoft YaHei','Hiragino Sans GB',sans-serif;
+  background:#f4f9ff;color:#1a1a1a;overflow-x:hidden}
+
+:root{
+  --blue:#1E90D4;--blue-dark:#1471b8;--blue-pale:#e8f4ff;
+  --blue-pale2:#f4f9ff;--green:#2ECC8A;--green-dark:#0e8a56;
+  --navy:#0a3264;--muted:#555;--light:#999;--border:#dde8f5;
+}
+
+/* NAV */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);height:62px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 64px;
+  transition:box-shadow 0.3s;
+}
+#nav.scrolled{box-shadow:0 2px 24px rgba(30,144,212,0.10)}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo img{height:42px;width:42px;object-fit:contain}
+.nav-logo-text{font-size:16px;font-weight:700;color:var(--navy);letter-spacing:0.04em}
+.nav-links{display:flex;gap:38px;list-style:none}
+.nav-links a{color:var(--muted);font-size:14px;letter-spacing:0.03em;text-decoration:none;
+  transition:color 0.2s;position:relative;padding-bottom:4px}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;
+  background:var(--blue);transition:width 0.25s;border-radius:1px}
+.nav-links a:hover,.nav-links a.active{color:var(--navy)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-cta{background:var(--blue);color:#fff;padding:9px 26px;border-radius:3px;
+  font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;
+  transition:background 0.2s,transform 0.15s}
+.nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
+
+/* PAGE HERO */
+#page-hero{
+  margin-top:62px;
+  background:linear-gradient(135deg,#e4f2fd 0%,#f0f8ff 50%,#e8f5fe 100%);
+  border-bottom:1.5px solid var(--border);
+  padding:52px 64px 44px;
+}
+.ph-label{color:var(--blue);font-size:12px;letter-spacing:0.18em;font-weight:600;
+  text-transform:uppercase;margin-bottom:12px}
+.ph-h1{color:var(--navy);font-size:clamp(30px,3.2vw,42px);font-weight:700;
+  letter-spacing:0.05em;margin-bottom:10px}
+.ph-p{color:var(--muted);font-size:15px;line-height:1.8;max-width:580px}
+
+/* BODY */
+.page-body{max-width:1100px;margin:0 auto;padding:52px 64px 80px}
+
+/* PROMISE STRIP */
+.promise-strip{
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  padding:28px 36px;margin-bottom:36px;
+  display:flex;gap:0;
+}
+.promise-item{
+  flex:1;display:flex;align-items:flex-start;gap:14px;
+  padding:0 28px;border-right:1px solid var(--border);
+}
+.promise-item:first-child{padding-left:0}
+.promise-item:last-child{border-right:none}
+.pi-icon{font-size:28px;flex-shrink:0;margin-top:2px}
+.pi-title{color:var(--navy);font-size:15px;font-weight:600;margin-bottom:4px}
+.pi-desc{color:var(--muted);font-size:13px;line-height:1.65}
+
+/* CONTACT GRID */
+.contact-grid{
+  margin-bottom:36px;
+}
+
+/* CARD BASE */
+.c-card{
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  padding:32px 36px;
+  transition:box-shadow 0.25s,transform 0.25s;
+}
+.c-card:hover{box-shadow:0 6px 24px rgba(30,144,212,0.10);transform:translateY(-2px)}
+.c-card-label{color:var(--blue);font-size:11px;letter-spacing:0.14em;font-weight:600;
+  margin-bottom:14px}
+.c-card-title{color:var(--navy);font-size:20px;font-weight:600;margin-bottom:6px}
+.c-card-sub{color:var(--muted);font-size:13px;margin-bottom:22px;line-height:1.6}
+
+/* 联系方式条目 */
+.contact-row{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 0;border-bottom:1px solid #f0f5fc;
+}
+.contact-row:last-child{border-bottom:none;padding-bottom:0}
+.cr-icon{
+  width:40px;height:40px;border-radius:8px;
+  background:var(--blue-pale);border:1px solid #c0daf5;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.cr-label{color:var(--light);font-size:11px;letter-spacing:0.06em;margin-bottom:3px}
+.cr-val{color:var(--navy);font-size:15px;font-weight:600;letter-spacing:0.03em}
+.cr-val a{color:var(--blue);text-decoration:none}
+.cr-val a:hover{text-decoration:underline}
+.cr-copy{
+  margin-left:auto;background:var(--blue-pale);color:var(--blue);
+  border:1px solid #c0daf5;border-radius:4px;
+  font-size:11px;padding:4px 10px;cursor:pointer;font-family:inherit;
+  transition:background 0.15s;white-space:nowrap;
+}
+.cr-copy:hover{background:#c8dff5}
+.cr-copy.copied{background:#d6f5e8;color:var(--green-dark);border-color:#8ed8bb}
+
+/* 微信公众号卡片 */
+.wechat-card{
+  background:linear-gradient(135deg,#edfaf4 0%,#f4fbf7 100%);
+  border:1px solid #b8e8d2;
+}
+.wechat-card .c-card-label{color:var(--green-dark)}
+.wechat-card .c-card-title{color:#0a4028}
+.wechat-qr-placeholder{
+  width:110px;height:110px;border-radius:8px;
+  background:#fff;border:1.5px solid #b8e8d2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;flex-shrink:0;
+}
+.wechat-info-wrap{display:flex;gap:20px;align-items:flex-start}
+.wechat-info{flex:1}
+.wechat-name{color:#0a4028;font-size:16px;font-weight:600;margin-bottom:8px}
+.wechat-desc{color:#3a6a50;font-size:13px;line-height:1.75}
+.wechat-tip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#fff;border:1px solid #b8e8d2;border-radius:4px;
+  padding:6px 12px;font-size:12px;color:var(--green-dark);font-weight:500;
+  margin-top:14px;
+}
+
+/* PROCESS SECTION */
+.process-wrap{
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  padding:32px 36px;margin-bottom:36px;
+}
+.pw-title{color:var(--navy);font-size:17px;font-weight:600;margin-bottom:24px}
+.process-steps{display:flex;gap:0;align-items:flex-start;position:relative}
+.process-steps::before{
+  content:'';position:absolute;top:22px;left:22px;right:22px;height:1.5px;
+  background:linear-gradient(to right,var(--blue),#a8d4f5,var(--blue));
+  z-index:0;
+}
+.step{flex:1;display:flex;flex-direction:column;align-items:center;
+  text-align:center;position:relative;z-index:1}
+.step-num{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--blue);color:#fff;font-size:15px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:12px;box-shadow:0 2px 10px rgba(30,144,212,0.25);
+}
+.step-title{color:var(--navy);font-size:14px;font-weight:600;margin-bottom:5px}
+.step-desc{color:var(--muted);font-size:12px;line-height:1.6;padding:0 8px}
+
+/* FAQ */
+.faq-wrap{
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  padding:32px 36px;
+}
+.fw-title{color:var(--navy);font-size:17px;font-weight:600;margin-bottom:20px}
+.faq-item{border-bottom:1px solid #f0f5fc;padding:16px 0}
+.faq-item:last-child{border-bottom:none;padding-bottom:0}
+.faq-q{color:var(--navy);font-size:14px;font-weight:600;margin-bottom:7px;
+  display:flex;align-items:flex-start;gap:8px}
+.faq-q::before{content:'Q';color:var(--blue);font-size:12px;font-weight:700;
+  background:var(--blue-pale);border-radius:4px;padding:1px 6px;flex-shrink:0;margin-top:1px}
+.faq-a{color:var(--muted);font-size:13px;line-height:1.8;padding-left:28px}
+
+/* FOOTER CTA */
+#contact-cta{
+  background:linear-gradient(135deg,#1471b8 0%,#1E90D4 60%,#3aa8e8 100%);
+  padding:44px 64px;display:flex;justify-content:space-between;align-items:center;
+}
+.ct-left h3{color:#fff;font-size:22px;font-weight:500;margin-bottom:6px}
+.ct-left p{color:rgba(255,255,255,0.72);font-size:13px;line-height:1.7}
+.ct-right{display:flex;gap:16px;align-items:center}
+.btn-white{background:#fff;color:var(--blue);padding:11px 26px;border-radius:3px;
+  font-size:14px;font-weight:700;cursor:pointer;border:none;font-family:inherit;
+  transition:all 0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1)}
+.btn-white:hover{background:var(--blue-pale);transform:translateY(-2px)}
+.btn-outline-w{background:transparent;color:#fff;padding:11px 26px;border-radius:3px;
+  font-size:14px;font-weight:600;cursor:pointer;border:2px solid rgba(255,255,255,0.7);
+  font-family:inherit;transition:all 0.2s}
+.btn-outline-w:hover{background:rgba(255,255,255,0.15)}
+
+footer{background:#0a2a5e;padding:16px 64px;display:flex;justify-content:space-between;align-items:center}
+footer p{color:rgba(255,255,255,0.38);font-size:11px}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal.vis{opacity:1;transform:none}
+
+@media(max-width:900px){
+  #nav{padding:0 20px}
+  .nav-links{display:none}
+  .page-body{padding:32px 20px 60px}
+  .promise-strip{flex-direction:column;gap:18px}
+  .promise-item{border-right:none;border-bottom:1px solid var(--border);padding:0 0 18px}
+  .promise-item:last-child{border-bottom:none;padding-bottom:0}
+  .process-steps{flex-direction:column;gap:20px}
+  .process-steps::before{display:none}
+  .step{flex-direction:row;text-align:left;gap:14px}
+  .step-num{flex-shrink:0}
+  #contact-cta{flex-direction:column;gap:20px;text-align:center;padding:32px 24px}
+  .ct-right{flex-direction:column}
+  footer{flex-direction:column;gap:6px;text-align:center;padding:14px 20px}
+}
+/* ── Bootstrap 5 + 移动端响应式补丁 ── */
+#nav{padding:0!important;height:auto!important;min-height:62px;flex-wrap:wrap;align-items:stretch!important}
+.hj-nav-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;width:100%;padding:0 64px;min-height:62px}
+a.navbar-brand.nav-logo{padding:0;margin:0}
+.navbar-toggler{border:1.5px solid var(--blue)!important;padding:5px 10px;border-radius:4px;box-shadow:none!important}
+.navbar-toggler-icon{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%231E90D4' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")!important}
+.navbar-collapse{flex-basis:100%}
+.navbar-collapse.show .nav-links,.navbar-collapse.collapsing .nav-links{display:flex!important;flex-direction:column!important;gap:0;padding:8px 0 14px;border-top:1px solid var(--border);width:100%}
+.navbar-collapse.show .nav-links a,.navbar-collapse.collapsing .nav-links a{display:block;padding:9px 4px;font-size:15px;border-bottom:1px solid #eef3fa;width:auto}
+.navbar-collapse.show .nav-links a:last-child{border-bottom:none}
+.navbar-collapse.show .nav-cta,.navbar-collapse.collapsing .nav-cta{display:block!important;width:100%;margin:10px 0 6px;text-align:center}
+@media(max-width:991.98px){.hj-nav-inner{padding:10px 20px;min-height:0}}
+@media(max-width:767.98px){
+  #page-hero{padding:30px 20px 26px!important;flex-direction:column!important;gap:20px}
+  .ph-right{align-items:flex-start}
+  .page-body{padding:0 20px 50px!important}
+  #contact-cta{padding:30px 20px!important;flex-direction:column;gap:20px;text-align:center}
+  .ct-right{flex-direction:column;text-align:center}
+  footer{padding:14px 20px!important}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar navbar-expand-lg fixed-top hj-navbar" id="nav">
+  <div class="hj-nav-inner">
+  <a class="navbar-brand nav-logo" href="hejia_home_v3_final.html">
+    <img src="data:image/jpeg;base64,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PDN/pcty1zfi4F/bZu+gK3BZiSmFGVxIwy3Pyr+HWUUOtJ38wWHgreRzmnaZq48Jz6JeJYo8dmbS3lhkYrIPLKhmUqNnbgFu/NLofh19Oa5Vp5HjnsILcl53lYMgkDEb84HzjA+vFdFRS9rKzXcfsIXTfQ5fwzo+sacgNyLEva6bFY2ojkYiXy84dyVG3Py/KM455NR+G/DF/o9tfWxvxdR3lqu9nwCtxtYOw2qPlOV5OTxzmusoputJ38xLDwVvL9TkvCvhe80bXmujPA1l9gSGOJc5jl37pMcfcJ+YehZuMYrO0bwVqVleadJJc2rQWU0c8aKWyrsCJyOO5CEfV676iq+sTu33J+qU7JdjnLDStStvGOo35SNrK8KMri8kBQrEiYMO3YTlfvZzirfhiwvLCO/F4sQM9/NcR+XIW+R2yM5Awfb9a2KKzlUclZ+X4GkaUYu68/xCiiioNQooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//2Q==" alt="和珈Logo">
+    <span class="nav-logo-text">和珈文化传媒</span>
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="展开菜单">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarMain">
+    <ul class="navbar-nav ms-auto nav-links">
+      <li><a href="hejia_home_v3_final.html">首页</a></li>
+      <li><a href="hejia_about.html">关于我们</a></li>
+      <li><a href="hejia_services.html">服务内容</a></li>
+      <li><a href="hejia_cases.html">客户案例</a></li>
+      <li><a href="hejia_contact.html" class="active">联系我们</a></li>
+    </ul>
+    <button class="nav-cta ms-3" onclick="window.location.href='mailto:z62576258@163.com'">获取方案</button>
+  </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div id="page-hero">
+  <div class="ph-label">Contact Us</div>
+  <div class="ph-h1">联系我们</div>
+  <p class="ph-p">无论您有活动策划需求，还是希望了解我们的绿色会展解决方案，欢迎随时与我们联系。我们将在48小时内提供初步方案建议。</p>
+</div>
+
+<div class="page-body">
+
+  <!-- 三项承诺 -->
+  <div class="promise-strip reveal">
+    <div class="promise-item">
+      <div class="pi-icon">⚡</div>
+      <div>
+        <div class="pi-title">48小时内回复</div>
+        <div class="pi-desc">收到需求后，我们承诺48小时内与您取得联系，提供初步方案建议，不让您久等。</div>
+      </div>
+    </div>
+    <div class="promise-item">
+      <div class="pi-icon">🌱</div>
+      <div>
+        <div class="pi-title">免费绿色方案咨询</div>
+        <div class="pi-desc">无论活动规模大小，我们都乐于分享绿色会展的执行经验，提供专业的低碳解决思路。</div>
+      </div>
+    </div>
+    <div class="promise-item">
+      <div class="pi-icon">🤝</div>
+      <div>
+        <div class="pi-title">全流程贴身服务</div>
+        <div class="pi-desc">从首次沟通到活动结束，全程一对一跟进，策划、执行、复盘，每个环节都不缺席。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 联系方式 + 微信公众号 -->
+  <div class="contact-grid row g-3 reveal">
+
+    <!-- 联系方式卡 -->
+    <div class="col-12 col-md-6">
+    <div class="c-card h-100">
+      <div class="c-card-label">CONTACT INFO</div>
+      <div class="c-card-title">直接联系我们</div>
+      <div class="c-card-sub">您可以通过以下任意方式与我们取得联系，我们随时在线。</div>
+
+      <div class="contact-row">
+        <div class="cr-icon">📞</div>
+        <div>
+          <div class="cr-label">联系电话</div>
+          <div class="cr-val"><a href="tel:13588725432">135 8872 5432</a></div>
+        </div>
+        <button class="cr-copy" onclick="copyText('13588725432',this)">复制</button>
+      </div>
+
+      <div class="contact-row">
+        <div class="cr-icon">✉️</div>
+        <div>
+          <div class="cr-label">电子邮箱</div>
+          <div class="cr-val"><a href="mailto:z62576258@163.com">z62576258@163.com</a></div>
+        </div>
+        <button class="cr-copy" onclick="copyText('z62576258@163.com',this)">复制</button>
+      </div>
+
+      <div class="contact-row">
+        <div class="cr-icon">📍</div>
+        <div>
+          <div class="cr-label">注册地</div>
+          <div class="cr-val">上海</div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="cr-icon">🕐</div>
+        <div>
+          <div class="cr-label">响应时效</div>
+          <div class="cr-val">工作日即时响应 · 48小时内回复方案</div>
+        </div>
+      </div>
+    </div>
+    </div><!-- /col -->
+
+    <!-- 微信公众号卡 -->
+    <div class="col-12 col-md-6">
+    <div class="c-card wechat-card h-100">
+      <div class="c-card-label">WECHAT</div>
+      <div class="c-card-title">关注微信公众号</div>
+      <div class="c-card-sub">关注我们的公众号，获取最新绿色会展资讯、案例分享及行业动态。</div>
+      <div class="wechat-info-wrap">
+        <div class="wechat-qr-placeholder">
+          <span style="font-size:36px">📱</span>
+          <span style="font-size:10px;color:#3a6a50;text-align:center;line-height:1.3">扫码关注<br>公众号</span>
+        </div>
+        <div class="wechat-info">
+          <div class="wechat-name">上海和珈文化传媒有限公司</div>
+          <div class="wechat-desc">
+            · 绿色会展行业动态与资讯<br>
+            · 最新活动案例与执行分享<br>
+            · 碳中和 · ESG · 可持续发展<br>
+            · 活动策划实用干货
+          </div>
+          <div class="wechat-tip">💬 &nbsp;也可通过公众号直接留言咨询</div>
+        </div>
+      </div>
+    </div>
+    </div><!-- /col -->
+
+  </div>
+
+  <!-- 合作流程 -->
+  <div class="process-wrap reveal">
+    <div class="pw-title">合作流程 · 简单高效</div>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">告知需求</div>
+          <div class="step-desc">通过电话、邮箱或公众号告知活动类型、时间、规模及特殊要求</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">方案沟通</div>
+          <div class="step-desc">48小时内我们提供初步方案建议，包括绿色执行方案及预算参考</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">细节确认</div>
+          <div class="step-desc">双方深入沟通，细化方案、确认时间线与执行分工</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">签约执行</div>
+          <div class="step-desc">签署合同，我们全程跟进，从采购到现场到数字化归档一站交付</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 常见问题 -->
+  <div class="faq-wrap reveal">
+    <div class="fw-title">常见问题</div>
+    <div class="faq-item">
+      <div class="faq-q">你们服务的活动规模有下限吗？</div>
+      <div class="faq-a">没有。我们服务过近200人的国际论坛，也承接过小型学术讲座。无论规模大小，只要您有绿色会展需求，我们都欢迎联系。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">一定要所有服务都找你们吗？可以只要部分服务吗？</div>
+      <div class="faq-a">当然可以。我们提供全流程一体化交付，也接受单项服务委托，例如只做摄影摄像、只做茶歇采购或只做同传翻译。按需选择，灵活合作。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">如何证明你们的活动真的是"绿色低碳"的？</div>
+      <div class="faq-a">我们提供活动碳排放估算报告及绿色采购清单，可作为客户ESG披露报告的配套材料。我们服务的UNDP气候周项目本身以气候议题为核心，是绿色执行的真实案例。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">你们能承接国际活动、需要英文服务的项目吗？</div>
+      <div class="faq-a">可以。我们提供中英文同声传译服务，支持国际视频会议连接，有丰富的国际组织及双语活动执行经验，材料设计也可提供中英双语版本。</div>
+    </div>
+  </div>
+
+</div><!-- /page-body -->
+
+<!-- BOTTOM CTA -->
+<section id="contact-cta">
+  <div class="ct-left">
+    <h3>准备好开始了吗？</h3>
+    <p>告诉我们您的活动需求，我们48小时内提供初步方案 · 绿色会展，从这里开始</p>
+  </div>
+  <div class="ct-right">
+    <button class="btn-outline-w" onclick="window.location.href='hejia_services.html'">查看服务内容</button>
+    <button class="btn-white" onclick="window.location.href='tel:13588725432'">📞 &nbsp;立即致电</button>
+    <button class="btn-white" onclick="window.location.href='mailto:z62576258@163.com'">✉️ &nbsp;发送邮件</button>
+  </div>
+</section>
+
+<footer>
+  <p>© 2023 上海和珈文化传媒有限公司 &nbsp;·&nbsp; 上海 &nbsp;·&nbsp; 专注绿色会展整体执行服务</p>
+  <p>公众号：上海和珈文化传媒有限公司 &nbsp;·&nbsp; z62576258@163.com</p>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// 复制功能
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '已复制 ✓';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '复制';
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(() => {
+    // Fallback
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    btn.textContent = '已复制 ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="../AI问答/chatbot.css">
+<script src="../AI问答/chatbot.js"></script>
+</body>
+</html>

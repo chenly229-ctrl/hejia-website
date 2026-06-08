@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会议报价单生成器 — 上海和珈文化传媒有限公司</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="company-name">上海和珈文化传媒有限公司</div>
+      <div class="page-title">会议报价单生成器</div>
+    </div>
+  </header>
+
+  <!-- ===== BASIC INFO CARD ===== -->
+  <div class="container-xl px-3 px-md-4 mt-3">
+    <section class="basic-info-card card">
+      <div class="card-body py-3 px-3 px-md-4">
+        <div class="row g-3">
+          <div class="col-12 col-sm-6 col-lg">
+            <div class="field-group">
+              <label for="client-name" class="form-label">客户单位</label>
+              <input type="text" id="client-name" class="form-control" placeholder="请输入客户单位">
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg">
+            <div class="field-group">
+              <label for="meeting-name" class="form-label">会议名称</label>
+              <input type="text" id="meeting-name" class="form-control" placeholder="请输入会议名称">
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg">
+            <div class="field-group">
+              <label for="meeting-date" class="form-label">会议日期</label>
+              <input type="date" id="meeting-date" class="form-control">
+            </div>
+          </div>
+          <div class="col-6 col-sm-3 col-lg">
+            <div class="field-group">
+              <label for="attendees" class="form-label">参会人数</label>
+              <input type="number" id="attendees" class="form-control" value="100" min="1" step="1">
+            </div>
+          </div>
+          <div class="col-6 col-sm-3 col-lg">
+            <div class="field-group">
+              <label for="half-days" class="form-label">半天数</label>
+              <input type="number" id="half-days" class="form-control" value="2" min="1" step="1">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== MAIN BODY ===== -->
+  <div class="container-xl px-3 px-md-4 mt-3 mb-5">
+    <div class="row g-3 align-items-start">
+
+      <!-- LEFT COLUMN: categories + custom items -->
+      <div class="col-12 col-lg-8 left-col">
+
+        <!-- 1. 设计类 -->
+        <div class="category-section" id="cat-design">
+          <div class="category-header" data-target="cat-design-body">
+            <span class="cat-title">🎨 设计类</span>
+            <span class="cat-subtotal">¥0</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="category-body" id="cat-design-body">
+
+            <div class="item-row" data-key="design-backdrop" data-qty-type="fixed">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">会议背景板设计</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="1500" step="0.01" readonly>
+                <span class="item-unit-label">元/次</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="0.01" readonly>
+                <span class="item-unit-name">次</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="design-banner" data-qty-type="fixed">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">易拉宝设计</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="300" step="0.01" readonly>
+                <span class="item-unit-label">元/次</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="0.01" readonly>
+                <span class="item-unit-name">次</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="design-booklet" data-qty-type="user">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">会议手册设计</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="100" step="0.01" readonly>
+                <span class="item-unit-label">元/页</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="0.01" readonly>
+                <span class="item-unit-name">页</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="design-poster" data-qty-type="fixed">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">海报设计制作</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="2000" step="0.01" readonly>
+                <span class="item-unit-label">元/次</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="0.01" readonly>
+                <span class="item-unit-name">次</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="design-misc" data-qty-type="fixed">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">其他延展物料设计（席卡/PPT/挂牌等）</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="500" step="0.01" readonly>
+                <span class="item-unit-label">元/次</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="0.01" readonly>
+                <span class="item-unit-name">次</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 2. 印刷物料类 -->
+        <div class="category-section" id="cat-print">
+          <div class="category-header" data-target="cat-print-body">
+            <span class="cat-title">🖨️ 印刷物料类</span>
+            <span class="cat-subtotal">¥0</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="category-body" id="cat-print-body">
+
+            <div class="item-row" data-key="print-backdrop-uv" data-qty-type="user-area">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">背景板黑底刀刮布UV印刷</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="120" step="0.01" readonly>
+                <span class="item-unit-label">元/㎡</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="16.5" min="0" step="0.01" readonly>
+                <span class="item-unit-name">㎡</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="print-backdrop-spray" data-qty-type="user-area">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">背景板喷绘</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="80" step="0.01" readonly>
+                <span class="item-unit-label">元/㎡</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="16.5" min="0" step="0.01" readonly>
+                <span class="item-unit-name">㎡</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="print-banner" data-qty-type="user">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">易拉宝制作</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="200" step="0.01" readonly>
+                <span class="item-unit-label">元/个</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="2" min="0" step="0.01" readonly>
+                <span class="item-unit-name">个</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="print-booklet" data-qty-type="attendees-pages">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">会议手册印制</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="5" step="0.01" readonly>
+                <span class="item-unit-label">元/页·册</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="20" min="0" step="1" readonly>
+                <span class="item-unit-name">页</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="print-brochure" data-qty-type="attendees-pages">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">宣传册印刷</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="3" step="0.01" readonly>
+                <span class="item-unit-label">元/页</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="50" min="0" step="1" readonly>
+                <span class="item-unit-name">页</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="print-thesis" data-qty-type="attendees-pages">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">论文集印制</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="0.2" step="0.01" readonly>
+                <span class="item-unit-label">元/页</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="100" min="0" step="1" readonly>
+                <span class="item-unit-name">页</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="print-namecard" data-qty-type="attendees">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">席卡</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="5" step="0.01" readonly>
+                <span class="item-unit-label">元/个</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">个</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="print-badge" data-qty-type="attendees">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">嘉宾/工作人员挂牌</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="5" step="0.01" readonly>
+                <span class="item-unit-label">元/个</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">个</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="print-ticket" data-qty-type="attendees">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">餐券制作</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="1" step="0.01" readonly>
+                <span class="item-unit-label">元/张</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">张</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="print-podium" data-qty-type="user">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">讲台KT板/接机牌</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="35" step="0.01" readonly>
+                <span class="item-unit-label">元/个</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="2" min="0" step="1" readonly>
+                <span class="item-unit-name">个</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="print-countdown" data-qty-type="user">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">倒计时牌</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="30" step="0.01" readonly>
+                <span class="item-unit-label">元/块</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="2" min="0" step="1" readonly>
+                <span class="item-unit-name">块</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="print-cert" data-qty-type="user">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">荣誉证书</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="20" step="0.01" readonly>
+                <span class="item-unit-label">元/个</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="10" min="0" step="1" readonly>
+                <span class="item-unit-name">个</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="print-pen" data-qty-type="attendees">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">Logo中性笔</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="2" step="0.01" readonly>
+                <span class="item-unit-label">元/支</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">支</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="print-sign" data-qty-type="user">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">指引牌</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="35" step="0.01" readonly>
+                <span class="item-unit-label">元/个</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="4" min="0" step="1" readonly>
+                <span class="item-unit-name">个</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="print-checkin" data-qty-type="fixed">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">会议签到台</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="50" step="0.01" readonly>
+                <span class="item-unit-label">元/套</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">套</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 3. 摄影摄像类 -->
+        <div class="category-section" id="cat-photo">
+          <div class="category-header" data-target="cat-photo-body">
+            <span class="cat-title">📷 摄影摄像类</span>
+            <span class="cat-subtotal">¥0</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="category-body" id="cat-photo-body">
+
+            <div class="item-row" data-key="photo-photo" data-qty-type="half-days">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">摄影</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="1500" step="0.01" readonly>
+                <span class="item-unit-label">元/半天</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="2" min="0" step="1" readonly>
+                <span class="item-unit-name">半天</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="photo-live" data-qty-type="half-days">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">摄像直播</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="800" step="0.01" readonly>
+                <span class="item-unit-label">元/半天</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="2" min="0" step="1" readonly>
+                <span class="item-unit-name">半天</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="photo-mobile" data-qty-type="half-days">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">移动摄像+一分钟视频</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="2000" step="0.01" readonly>
+                <span class="item-unit-label">元/半天</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="2" min="0" step="1" readonly>
+                <span class="item-unit-name">半天</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="photo-fixed" data-qty-type="half-days">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">固定摄像</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="1500" step="0.01" readonly>
+                <span class="item-unit-label">元/半天</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="2" min="0" step="1" readonly>
+                <span class="item-unit-name">半天</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="photo-steno" data-qty-type="fixed">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">速记</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="5000" step="0.01" readonly>
+                <span class="item-unit-label">元/场次</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">场次</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 4. 餐饮茶歇类 -->
+        <div class="category-section" id="cat-catering">
+          <div class="category-header" data-target="cat-catering-body">
+            <span class="cat-title">🍵 餐饮茶歇类</span>
+            <span class="cat-subtotal">¥0</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="category-body" id="cat-catering-body">
+
+            <div class="item-row" data-key="food-tea" data-qty-type="attendees">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">茶歇</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="50" step="0.01" readonly>
+                <span class="item-unit-label">元/人</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">人</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="food-coffee" data-qty-type="user">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">咖啡代购</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="12" step="0.01" readonly>
+                <span class="item-unit-label">元/杯</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="10" min="0" step="1" readonly>
+                <span class="item-unit-name">杯</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 5. 同传设备类 -->
+        <div class="category-section" id="cat-interp">
+          <div class="category-header" data-target="cat-interp-body">
+            <span class="cat-title">🎧 同传设备类</span>
+            <span class="cat-subtotal">¥0</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="category-body" id="cat-interp-body">
+
+            <div class="item-row" data-key="interp-equipment" data-qty-type="fixed">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">同传设备整套（控制器+红外发射机+辐射板+议员机）</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="9500" step="0.01" readonly>
+                <span class="item-unit-label">元/套</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">套</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="interp-install" data-qty-type="fixed">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">同传设备安装调试</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="2000" step="0.01" readonly>
+                <span class="item-unit-label">元/人次</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="2" min="0" step="1" readonly>
+                <span class="item-unit-name">人次</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="interp-receiver" data-qty-type="attendees">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">接收器及耳机</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="50" step="0.01" readonly>
+                <span class="item-unit-label">元/台</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">台</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="interp-booth" data-qty-type="user">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">翻译间</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="4000" step="0.01" readonly>
+                <span class="item-unit-label">元/间</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">间</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="interp-audio" data-qty-type="fixed">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">音响系统</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="8000" step="0.01" readonly>
+                <span class="item-unit-label">元/套</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">套</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="interp-launch" data-qty-type="fixed">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">启动装置</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="2000" step="0.01" readonly>
+                <span class="item-unit-label">元/项</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">项</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 6. 安装运输类 -->
+        <div class="category-section" id="cat-install">
+          <div class="category-header" data-target="cat-install-body">
+            <span class="cat-title">🚚 安装运输类</span>
+            <span class="cat-subtotal">¥0</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="category-body" id="cat-install-body">
+
+            <div class="item-row" data-key="install-mount" data-qty-type="user">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">背景板安装</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="300" step="0.01" readonly>
+                <span class="item-unit-label">元/次</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">次</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="install-unmount" data-qty-type="user">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">背景板拆卸</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="300" step="0.01" readonly>
+                <span class="item-unit-label">元/次</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">次</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="install-transport" data-qty-type="user">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">物料运输费</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="200" step="0.01" readonly>
+                <span class="item-unit-label">元/次</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="2" min="0" step="1" readonly>
+                <span class="item-unit-name">次</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="install-labor" data-qty-type="user">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">背板安装拆卸人工费</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="600" step="0.01" readonly>
+                <span class="item-unit-label">元/人</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="3" min="0" step="1" readonly>
+                <span class="item-unit-name">人</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="install-trash" data-qty-type="fixed">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">垃圾清运</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="3000" step="0.01" readonly>
+                <span class="item-unit-label">元/场次</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">场次</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 7. 场地与综合服务类 -->
+        <div class="category-section" id="cat-venue">
+          <div class="category-header" data-target="cat-venue-body">
+            <span class="cat-title">🏢 场地与综合服务类</span>
+            <span class="cat-subtotal">¥0</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="category-body" id="cat-venue-body">
+
+            <div class="item-row" data-key="venue-planning" data-qty-type="fixed">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">会议统筹及策划服务</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="20000" step="0.01" readonly>
+                <span class="item-unit-label">元/次</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">次</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+            <div class="item-row" data-key="venue-rent" data-qty-type="hours">
+              <label class="item-check-label">
+                <input type="checkbox" class="item-check">
+                <span class="item-name">场租</span>
+              </label>
+              <div class="item-controls">
+                <input type="number" class="item-price" value="0" step="0.01" readonly>
+                <span class="item-unit-label">元/小时</span>
+                <span class="item-times">×</span>
+                <input type="number" class="item-qty" value="1" min="0" step="1" readonly>
+                <span class="item-unit-name">小时</span>
+                <span class="item-total">¥0.00</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ===== CUSTOM ITEMS ===== -->
+        <div class="category-section custom-section">
+          <div class="category-header" data-target="cat-custom-body">
+            <span class="cat-title">✏️ 自定义项目</span>
+            <span class="cat-subtotal">¥0</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="category-body" id="cat-custom-body">
+            <div id="custom-items-container"></div>
+            <div class="custom-add-row">
+              <button id="add-custom-btn" class="add-custom-btn">+ 添加自定义项目</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /col left -->
+
+      <!-- RIGHT COLUMN: sticky summary -->
+      <div class="col-12 col-lg-4 right-col">
+        <div class="card summary-card sticky-top" style="top: 16px;">
+          <div class="card-body p-3 p-md-4">
+            <h2 class="summary-title">报价汇总</h2>
+
+            <div id="summary-list" class="summary-list">
+              <div class="summary-empty">尚未选择任何项目</div>
+            </div>
+
+            <hr class="summary-divider">
+
+            <div class="summary-row">
+              <span class="summary-label">小计</span>
+              <span id="subtotal-amount" class="summary-value">¥0.00</span>
+            </div>
+
+            <div class="summary-row">
+              <label class="summary-label" for="tax-select">税费/管理费</label>
+              <select id="tax-select" class="form-select summary-select">
+                <option value="0">不含税</option>
+                <option value="0.06" selected>增值税 6%</option>
+                <option value="0.11">管理费10% + 税费1%</option>
+              </select>
+            </div>
+
+            <div class="summary-row">
+              <label class="summary-label" for="discount-input">优惠减免（元）</label>
+              <input type="number" id="discount-input" class="summary-discount" value="0" min="0" step="0.01">
+            </div>
+
+            <hr class="summary-divider">
+
+            <div class="summary-row grand-total-row">
+              <span class="summary-label grand-label">总计</span>
+              <span id="grand-total-amount" class="summary-value grand-value">¥0.00</span>
+            </div>
+
+            <button id="export-btn" class="btn export-btn w-100 mt-3">导出报价单 (Excel)</button>
+          </div>
+        </div>
+      </div><!-- /col right -->
+
+    </div><!-- /row -->
+  </div><!-- /container-xl -->
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style/dist/xlsx.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="template-b64.js"></script>
+  <script src="script.js?v=20260604-1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

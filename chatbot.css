@@ -1,0 +1,523 @@
+/* ============================================================
+   chatbot.css — 上海和珈文化传媒有限公司 官网智能客服样式
+   作用域前缀：#hj-  避免与现有网页 CSS 冲突
+   品牌色系与 company CSS Variables 保持一致
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   CSS 变量（品牌色系）
+   ------------------------------------------------------------ */
+:root {
+  --hj-primary:       #1E90D4;  /* 主蓝色 */
+  --hj-primary-dark:  #1471b8;  /* 深蓝色（悬停态） */
+  --hj-primary-light: #e8f4ff;  /* 浅蓝背景 */
+  --hj-title-dark:    #0a3264;  /* 深蓝（标题） */
+  --hj-green:         #2ECC8A;  /* 辅助绿色（在线状态等） */
+  --hj-border:        #dde8f5;  /* 边框色 */
+  --hj-text:          #555;     /* 正文灰 */
+  --hj-white:         #ffffff;
+  --hj-bot-bubble:    #f0f7ff;  /* 机器人消息气泡背景 */
+  --hj-shadow:        0 4px 24px rgba(30, 144, 212, 0.18);
+  --hj-radius:        12px;
+  --hj-transition:    0.25s ease;
+}
+
+
+/* ============================================================
+   浮动触发按钮  #hj-chat-btn
+   ============================================================ */
+#hj-chat-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 9999;
+
+  width: 64px;
+  height: 72px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+
+  background-color: var(--hj-primary);
+  color: var(--hj-white);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  box-shadow: 0 4px 16px rgba(30, 144, 212, 0.40),
+              0 2px 6px  rgba(0, 0, 0, 0.12);
+
+  transition: background-color var(--hj-transition),
+              transform       var(--hj-transition),
+              box-shadow      var(--hj-transition);
+}
+
+/* 图标（上方） */
+.hj-btn-icon {
+  font-size: 26px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* 文字（下方） */
+.hj-btn-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  pointer-events: none;
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+#hj-chat-btn:hover {
+  background-color: var(--hj-primary-dark);
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(30, 144, 212, 0.50),
+              0 3px 8px  rgba(0, 0, 0, 0.15);
+}
+
+#hj-chat-btn:active {
+  transform: scale(0.96);
+}
+
+/* SVG / 图标居中辅助 */
+#hj-chat-btn svg {
+  width: 26px;
+  height: 26px;
+  fill: var(--hj-white);
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   聊天窗口  #hj-chat-window
+   ============================================================ */
+#hj-chat-window {
+  position: fixed;
+  right: 24px;
+  bottom: 90px;           /* 悬浮在按钮上方 */
+  z-index: 9998;
+
+  width: 360px;
+  max-height: 500px;
+  border-radius: var(--hj-radius);
+  overflow: hidden;
+
+  background-color: var(--hj-white);
+  border: 1px solid var(--hj-border);
+  box-shadow: var(--hj-shadow);
+
+  display: none;          /* 默认隐藏；JS 切换为 flex */
+  flex-direction: column;
+
+  /* 打开/关闭动画基础 */
+  opacity: 0;
+  transform: translateY(12px) scale(0.97);
+  transition: opacity    var(--hj-transition),
+              transform  var(--hj-transition);
+}
+
+/* 打开状态（JS 添加 .hj-open 类） */
+#hj-chat-window.hj-open {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+
+/* ============================================================
+   标题栏  #hj-chat-header
+   ============================================================ */
+#hj-chat-header {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 52px;
+
+  background-color: var(--hj-primary);
+  border-radius: var(--hj-radius) var(--hj-radius) 0 0;
+  color: var(--hj-white);
+}
+
+/* 左侧品牌区：头像 + 名称 */
+#hj-chat-header .hj-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 头部小头像 */
+#hj-chat-header .hj-header-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.22);
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--hj-white);
+  flex-shrink: 0;
+}
+
+/* 标题文字 */
+#hj-chat-header .hj-header-title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--hj-white);
+}
+
+/* 在线状态小点 */
+#hj-chat-header .hj-header-status {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.80);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 1px;
+}
+
+#hj-chat-header .hj-header-status::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--hj-green);
+  flex-shrink: 0;
+}
+
+/* 关闭按钮 */
+#hj-chat-header .hj-close-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  color: var(--hj-white);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--hj-transition);
+  flex-shrink: 0;
+}
+
+#hj-chat-header .hj-close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.20);
+}
+
+
+/* ============================================================
+   消息列表区  #hj-messages
+   ============================================================ */
+#hj-messages {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 0;          /* 让 flex 子项可以收缩并滚动 */
+  height: 340px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 12px;
+
+  background-color: #f7fbff;
+}
+
+/* 自定义滚动条（Webkit） */
+#hj-messages::-webkit-scrollbar {
+  width: 4px;
+}
+#hj-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+#hj-messages::-webkit-scrollbar-thumb {
+  background-color: var(--hj-border);
+  border-radius: 4px;
+}
+#hj-messages::-webkit-scrollbar-thumb:hover {
+  background-color: #b8cce0;
+}
+
+
+/* ============================================================
+   消息气泡 — 通用
+   ============================================================ */
+.hj-msg-user,
+.hj-msg-bot {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: 100%;
+  animation: hj-fade-in 0.22s ease forwards;
+}
+
+/* 气泡文字内容 */
+.hj-msg-user .hj-bubble,
+.hj-msg-bot  .hj-bubble {
+  max-width: 75%;
+  padding: 9px 13px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+
+/* ============================================================
+   用户消息  .hj-msg-user
+   ============================================================ */
+.hj-msg-user {
+  flex-direction: row-reverse; /* 气泡靠右 */
+  align-self: flex-end;
+}
+
+.hj-msg-user .hj-bubble {
+  background-color: var(--hj-primary);
+  color: var(--hj-white);
+  border-bottom-right-radius: 4px; /* 右下角收尖，模拟对话尖角 */
+}
+
+
+/* ============================================================
+   机器人消息  .hj-msg-bot
+   ============================================================ */
+.hj-msg-bot {
+  flex-direction: row; /* 头像在左 */
+  align-self: flex-start;
+}
+
+/* 机器人头像小圆圈 */
+.hj-msg-bot .hj-bot-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--hj-primary);
+  color: var(--hj-white);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  align-self: flex-end;
+  margin-bottom: 2px;
+  box-shadow: 0 2px 6px rgba(30, 144, 212, 0.30);
+}
+
+.hj-msg-bot .hj-bubble {
+  background-color: var(--hj-bot-bubble);
+  color: var(--hj-text);
+  border: 1px solid var(--hj-border);
+  border-bottom-left-radius: 4px; /* 左下角收尖 */
+}
+
+
+/* ============================================================
+   欢迎消息  .hj-msg-welcome
+   ============================================================ */
+.hj-msg-welcome .hj-bubble {
+  background-color: var(--hj-primary-light);
+  border: 1px solid rgba(30, 144, 212, 0.22);
+  color: var(--hj-title-dark);
+  font-size: 13px;
+}
+
+
+/* ============================================================
+   打字动画  .hj-typing
+   三个跳动小点，显示机器人正在输入
+   ============================================================ */
+.hj-typing {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+}
+
+.hj-typing .hj-bot-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--hj-primary);
+  color: var(--hj-white);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(30, 144, 212, 0.30);
+}
+
+.hj-typing .hj-dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--hj-bot-bubble);
+  border: 1px solid var(--hj-border);
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+  padding: 10px 14px;
+}
+
+.hj-typing .hj-dots span {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--hj-primary);
+  opacity: 0.5;
+  animation: hj-dot-bounce 1.2s infinite ease-in-out;
+}
+
+.hj-typing .hj-dots span:nth-child(1) { animation-delay: 0s; }
+.hj-typing .hj-dots span:nth-child(2) { animation-delay: 0.2s; }
+.hj-typing .hj-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes hj-dot-bounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+
+/* ============================================================
+   消息淡入动画
+   ============================================================ */
+@keyframes hj-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ============================================================
+   输入区域  #hj-chat-footer
+   ============================================================ */
+#hj-chat-footer {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+
+  background-color: var(--hj-white);
+  border-top: 1px solid var(--hj-border);
+}
+
+/* 输入框 */
+#hj-input {
+  flex: 1 1 auto;
+  min-width: 0;
+
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid var(--hj-border);
+  border-radius: 8px;
+  background-color: #f7fbff;
+
+  font-size: 14px;
+  color: var(--hj-text);
+  font-family: inherit;
+
+  outline: none;
+  transition: border-color var(--hj-transition),
+              box-shadow   var(--hj-transition);
+}
+
+#hj-input::placeholder {
+  color: #aac4d8;
+}
+
+#hj-input:focus {
+  border-color: var(--hj-primary);
+  box-shadow: 0 0 0 3px rgba(30, 144, 212, 0.12);
+  background-color: var(--hj-white);
+}
+
+/* 发送按钮 */
+#hj-send-btn {
+  flex-shrink: 0;
+  height: 38px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+
+  background-color: var(--hj-primary);
+  color: var(--hj-white);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+
+  transition: background-color var(--hj-transition),
+              transform       var(--hj-transition);
+}
+
+#hj-send-btn:hover {
+  background-color: var(--hj-primary-dark);
+}
+
+#hj-send-btn:active {
+  transform: scale(0.95);
+}
+
+#hj-send-btn:disabled {
+  background-color: #a0c8e8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* ============================================================
+   响应式 — 小屏幕（移动端）
+   ============================================================ */
+@media (max-width: 480px) {
+  #hj-chat-window {
+    /* 在小屏上几乎全屏显示 */
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: 85vh;
+    border-radius: var(--hj-radius) var(--hj-radius) 0 0;
+  }
+
+  #hj-chat-btn {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  #hj-messages {
+    height: auto;
+    flex: 1 1 auto;
+  }
+}
