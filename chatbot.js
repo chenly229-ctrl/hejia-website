@@ -1131,8 +1131,12 @@
     if (/报价|价格|多少钱|费用|预算|收费|cost|price|quote/.test(input)) {
       found.push('quotation');
     }
+    // 公司介绍查询
+    if (/你们是什么公司|你们公司|公司介绍|公司是做什么的|你们是做什么的|你们是谁|什么公司|主要业务|公司背景|company profile|about company|who are you|what company/.test(input)) {
+      found.push('company_profile');
+    }
     // 服务范围查询
-    if (/你们做什么|有什么服务|服务内容|包含什么|能不能做|可以做|能做吗|提供什么|什么业务|service/.test(input)) {
+    if (/你们做什么|你们提供什么|有什么服务|服务内容|服务有哪些|包含什么|能不能做|可以做什么|能做什么|能做吗|提供什么|什么业务|业务范围|你们能做|公司服务|service scope|event service/.test(input)) {
       found.push('service_scope');
     }
     // 学术会议类型
@@ -1188,6 +1192,30 @@
     }
     // 通用回复
     return '一般活动建议提前预约时间参考：\n· 小型活动（50人以内）：提前 2–3 周\n· 中型活动（50–200人）：提前 1 个月\n· 大型或复杂活动（200人以上 / 多服务模块）：提前 2–3 个月\n· 如有同传设备、无人机表演：至少提前 1–3 个月\n\n建议越早启动越好，以确保资源档期充足、方案打磨充分。\n\n请问您的活动类型、人数和大概日期是什么？';
+  }
+
+  function getCompanyProfileAnswer() {
+    return '上海和珈文化传媒有限公司是一家活动策划与执行服务公司，主要为企业、机构和活动主办方提供会议、年会、发布会、展览展示、摄影摄像、舞台搭建、灯光音响、物料制作和现场执行等服务。\n\n我们可以根据客户的活动类型、人数、预算、场地和物料需求，协助规划合适的活动方案，并提供初步费用估算。\n\n您可以告诉我活动类型、人数和预算，我可以帮您初步判断可以做哪些内容。';
+  }
+
+  function getServiceScopeAnswer() {
+    return '我们主要可以协助以下服务：\n\n1. 活动策划与执行\n· 公司年会\n· 学术会议 / 论坛 / 研讨会\n· 产品发布会\n· 展览展示活动\n· 企业培训会议\n\n2. 现场搭建与设备\n· 舞台搭建\n· 背景板 / 展览板\n· 灯光音响\n· LED屏 / 投影\n· 指示牌 / 签到区布置\n\n3. 活动物料\n· 宣传册 / 年会手册\n· 席卡 / 胸牌 / 会议议程\n· 邀请函\n· 纪念品 / 礼品\n· 颁奖物料\n\n4. 人员与执行服务\n· 主持人 / 司仪\n· 摄影摄像\n· 现场执行人员\n· 茶歇 / 简餐协调\n\n如果您愿意提供活动类型、人数、预算和活动天数，我可以帮您初步推荐适合的方案。';
+  }
+
+  function getEventCapabilityAnswer(eventType) {
+    if (eventType === EVENT_TYPES.ANNUAL) {
+      return '可以的，我们可以承接公司年会及颁奖晚会的全流程策划与执行，主要包括：\n\n· 年会流程策划与统筹\n· 主持人 / 司仪安排\n· 舞台搭建与灯光音响\n· 摄影摄像\n· 颁奖道具与纪念品\n· 年会手册制作\n· 茶歇 / 简餐协调\n· 现场执行人员\n\n如果您有具体人数和预算，我也可以继续帮您估算方案。';
+    }
+    if (eventType === EVENT_TYPES.ACADEMIC) {
+      return '可以的，我们可以承接学术会议、论坛及研讨会的执行服务，主要包括：\n\n· 签到台物料\n· 席卡 / 桌牌\n· 嘉宾胸牌\n· 会议议程印制\n· 现场指示牌\n· 宣传册 / 会议手册\n· 展览板\n· 摄影摄像\n· 茶歇 / 餐饮协调\n· 现场执行人员\n\n如果您有具体人数和预算，我也可以继续帮您估算方案。';
+    }
+    if (eventType === EVENT_TYPES.LAUNCH) {
+      return '可以的，我们可以承接产品发布会的策划与执行服务，主要包括：\n\n· 舞台设计与搭建\n· 背景板\n· LED大屏 / 投影\n· 灯光音响系统\n· 主持人\n· 摄影摄像\n· 媒体记者接待区布置\n· 现场执行人员\n\n如果您有具体人数和预算，我也可以继续帮您估算方案。';
+    }
+    if (eventType === EVENT_TYPES.EXHIBITION) {
+      return '可以的，我们可以承接展览展会及展示活动的搭建与执行服务，主要包括：\n\n· 展台 / 展位设计搭建\n· 展览板设计与制作\n· 灯光照明\n· 指示牌\n· 展柜 / 展架\n· 运输、安装、撤场\n· 垃圾清运\n\n如果您有具体人数和预算，我也可以继续帮您估算方案。';
+    }
+    return getServiceScopeAnswer();
   }
 
   // ─────────────────────────────────────────────
@@ -1898,32 +1926,46 @@
       return;
     }
 
-    // ── P4：检测意图（必须在 P5/P6 之前，预算推荐优先于普通报价） ──
+    // ── P4b：检测意图 ──
     const intent    = detectIntent(text);
     const eventType = detectEventType(text);
 
-    // ── P5：预算推荐查询（优先于普通报价流程，否则"预算"关键词会触发报价流程） ──
+    // ── P5a：公司介绍查询 → 直接回答（高优先级，先于报价和预算流程） ──
+    if (intent.has('company_profile') && !intent.has('budget_plan')) {
+      missCount = 0;
+      appendBotMsg(getCompanyProfileAnswer());
+      return;
+    }
+
+    // ── P5b：服务范围查询 → 直接回答（高优先级，先于报价和预算流程） ──
+    if (intent.has('service_scope') && !intent.has('budget_plan') && !intent.has('quotation')) {
+      missCount = 0;
+      appendBotMsg(eventType ? getEventCapabilityAnswer(eventType) : getServiceScopeAnswer());
+      return;
+    }
+
+    // ── P6：预算推荐查询（优先于普通报价流程，否则"预算"关键词会触发报价流程） ──
     if (intent.has('budget_plan')) {
       missCount = 0;
       startBudgetPlanFlow(text);
       return;
     }
 
-    // ── P6：上下文修订（报价或预算计划的延续，必须在新报价流程之前） ──
+    // ── P7：上下文修订（报价或预算计划的延续，必须在新报价流程之前） ──
     if ((lastQuoteContext || lastPlanContext) && detectQuoteRevisionIntent(text)) {
       missCount = 0;
       handleQuoteRevision(text);
       return;
     }
 
-    // ── P7：预约时间意图 → 直接回答 ──
+    // ── P8：预约时间意图 → 直接回答 ──
     if (intent.has('booking_time')) {
       missCount = 0;
       appendBotMsg(getBookingTimeAnswer(eventType));
       return;
     }
 
-    // ── P7：报价意图或服务需求描述 → 启动智能报价流程 ──
+    // ── P8b：报价意图或服务需求描述 → 启动智能报价流程 ──
     if (intent.has('quotation') || isQuoteTrigger(text) || hasServiceDescription(text)) {
       missCount = 0;
       startSmartQuoteFlow(text);
@@ -1956,6 +1998,13 @@
         /不(?:需要)?调整|不(?:用|要)调整|就这样|先这样|暂时不|好了|没问题|不变了|不需要了|够了|可以了|满意/.test(text)) {
       missCount = 0;
       appendBotMsg('好的，方案已记录，随时可以继续调整。如需进一步咨询，欢迎联系我们的顾问！');
+      return;
+    }
+
+    // ── P9c：包含公司/服务关键词但未被上方规则捕获 → 兜底回答，避免进入联系收集 ──
+    if (/公司|服务|业务|介绍|做什么|能做|可以做/.test(text)) {
+      missCount = 0;
+      appendBotMsg(/服务|业务|做什么|能做|可以做/.test(text) ? getServiceScopeAnswer() : getCompanyProfileAnswer());
       return;
     }
 
