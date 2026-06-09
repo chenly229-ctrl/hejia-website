@@ -239,7 +239,7 @@
     // 计算当前脚本所在目录，兼容不同引入方式
     const scriptSrc = (document.currentScript && document.currentScript.src) || '';
     const baseDir = scriptSrc ? scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1) : './';
-    const jsonUrl = baseDir + 'chatbot-qa.json';
+    const jsonUrl = baseDir + 'chatbot-qa.json?v=20260609-wechat-3';
 
     return fetch(jsonUrl)
       .then(function (res) {
@@ -1339,17 +1339,17 @@
     // ── 按预算等级分配 rawRec / rawExceed ──
     let rawRec, rawExceed;
     if (eventType === EVENT_TYPES.ANNUAL) {
-      if      (perPerson < 300)  { rawRec = corePool.slice(0, 3); rawExceed = [...corePool.slice(3), ...recPool, ...highPool]; }
-      else if (perPerson < 700)  { rawRec = [...corePool];         rawExceed = [...recPool, ...highPool]; }
-      else if (perPerson < 1500) { rawRec = [...corePool, ...recPool]; rawExceed = highPool.slice(); }
-      else                        { rawRec = [...corePool, ...recPool, ...highPool.slice(0, 4)]; rawExceed = highPool.slice(4); }
+      if      (perPerson < 300)  { rawRec = corePool.slice(0, 3); rawExceed = corePool.slice(3).concat(recPool).concat(highPool); }
+      else if (perPerson < 700)  { rawRec = corePool.slice();     rawExceed = recPool.concat(highPool); }
+      else if (perPerson < 1500) { rawRec = corePool.concat(recPool); rawExceed = highPool.slice(); }
+      else                        { rawRec = corePool.concat(recPool).concat(highPool.slice(0, 4)); rawExceed = highPool.slice(4); }
     } else {
-      const premItems = ['舞台搭建与灯光音响', '同声传译设备', '现场直播', '大规模展陈搭建'];
-      if      (perPerson < 200)  { rawRec = corePool.slice(0, 3); rawExceed = [...corePool.slice(3), ...recPool, ...highPool, ...premItems]; }
-      else if (perPerson < 400)  { rawRec = [...corePool]; rawExceed = [...recPool, ...highPool, ...premItems]; }
-      else if (perPerson < 700)  { rawRec = [...corePool, ...recPool.slice(0, 3)]; rawExceed = [...recPool.slice(3), ...highPool, ...premItems]; }
-      else if (perPerson < 1200) { rawRec = [...corePool, ...recPool, ...highPool.slice(0, 3)]; rawExceed = [...highPool.slice(3), ...premItems]; }
-      else                        { rawRec = [...corePool, ...recPool, ...highPool]; rawExceed = premItems.slice(); }
+      var premItems = ['舞台搭建与灯光音响', '同声传译设备', '现场直播', '大规模展陈搭建'];
+      if      (perPerson < 200)  { rawRec = corePool.slice(0, 3); rawExceed = corePool.slice(3).concat(recPool).concat(highPool).concat(premItems); }
+      else if (perPerson < 400)  { rawRec = corePool.slice(); rawExceed = recPool.concat(highPool).concat(premItems); }
+      else if (perPerson < 700)  { rawRec = corePool.concat(recPool.slice(0, 3)); rawExceed = recPool.slice(3).concat(highPool).concat(premItems); }
+      else if (perPerson < 1200) { rawRec = corePool.concat(recPool).concat(highPool.slice(0, 3)); rawExceed = highPool.slice(3).concat(premItems); }
+      else                        { rawRec = corePool.concat(recPool).concat(highPool); rawExceed = premItems.slice(); }
     }
 
     // ── 确保 requiredItems 出现在 rawRec 中 ──
@@ -1893,10 +1893,35 @@
    * @param {string} input
    */
   function handleUserMessage(input) {
-    const text = input.trim();
+    const text = input
+      .trim()
+      .replace(/\s+/g, '')
+      .replace(/你們/g, '你们')
+      .replace(/什麼/g, '什么')
+      .replace(/服務/g, '服务')
+      .replace(/業務/g, '业务')
+      .replace(/介紹/g, '介绍')
+      .replace(/誰/g, '谁')
+      .replace(/嗎/g, '吗')
+      .replace(/會/g, '会')
+      .replace(/這/g, '这')
+      .replace(/個/g, '个');
+
     if (!text) return;
 
     appendUserMsg(text);
+
+    // 微信兼容兜底：公司服务 / 公司介绍优先回答（在所有流程检测之前）
+    if (/公司服务|服务内容|服务范围|业务范围|你们做什么|你们能做什么|有什么服务|提供什么服务/.test(text)) {
+      missCount = 0;
+      appendBotMsg(getServiceScopeAnswer());
+      return;
+    }
+    if (/你们是什么公司|什么公司|公司介绍|公司是做什么的|你们是谁/.test(text)) {
+      missCount = 0;
+      appendBotMsg(getCompanyProfileAnswer());
+      return;
+    }
 
     // ── P1：报价流程进行中 ──
     if (quoteState !== null) {
